@@ -1,0 +1,49 @@
+.tile {
+  width: 138px;
+  height: 199px;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 48px 36px;
+  background-size: cover;
+  cursor: pointer;
+  overflow-y: hidden;
+
+  &__title {
+    font-family: sans-serif;
+    font-size: 28px;
+    text-shadow: 1px 1px 4px #000;
+    color: #ffff;
+    position: relative;
+    transition: 0.3s;
+  }
+  &__subtitle {
+    font-family: sans-serif;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 4px;
+    opacity: 0.8;
+  }
+
+  &__button {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    bottom: -50px;
+    padding: 16px 0;
+    font-size: 18px;
+    background: #21345d;
+    color: #fff;
+    transition: 0.3s;
+  }
+
+  &:hover &__button {
+    bottom: 0;
+  }
+
+  &:hover &__title {
+    margin-bottom: 15px;
+  }
+}

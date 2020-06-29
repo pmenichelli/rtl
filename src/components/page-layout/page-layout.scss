@@ -1,0 +1,23 @@
+.layout {
+  padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    padding: 0;
+    margin: auto;
+    width: 600px;
+  }
+}
+
+@media (min-width: 992px) {
+  .layout {
+    width: 800px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .layout {
+    width: 1000px;
+  }
+}

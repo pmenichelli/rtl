@@ -1,0 +1,30 @@
+.search {
+  &__title {
+    text-align: center;
+  }
+
+  &__field {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    > * {
+      margin: 15px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .search {
+    &__results {
+      justify-content: space-evenly;
+    }
+  }
+}
