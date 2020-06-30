@@ -1,45 +1,22 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { showsService } from "./services/shows-service";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+
 import SearchPage from "./pages/search/search-page";
 import EpisodePage from "./pages/episode/episode-page";
 
-// import "./App.css";
+import "./App.scss";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      shows: [],
-    };
-  }
+const Root = ({ store }) => (
+  <Provider store={store}>
+    <div className="triangular-background triangular-background--top-left triangular-background--bottom-right" />
+    <Router>
+      <Switch>
+        <Route path="/show/:id?" component={EpisodePage} />
+        <Route path="/" component={SearchPage} />
+      </Switch>
+    </Router>
+  </Provider>
+);
 
-  componentDidMount() {
-    showsService("powerpuff").then((shows) => {
-      console.log(shows);
-      this.setState({
-        shows,
-      });
-    });
-  }
-
-  render() {
-    return (
-      <Router>
-        <Switch>
-          <Route path="/episode">
-            <EpisodePage />
-          </Route>
-          <Route path="/">
-            <SearchPage />
-          </Route>
-          <Route path="*">
-            <SearchPage />
-          </Route>
-        </Switch>
-      </Router>
-    );
-  }
-}
-
-export default App;
+export default Root;

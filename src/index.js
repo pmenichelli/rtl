@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
-import { Provider } from "react-redux";
 
-import App from "./App";
+import Root from "./App";
 import rootReducer from "./reducers/reducers";
 import * as serviceWorker from "./serviceWorker";
 
@@ -18,9 +17,7 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <Root store={store} />
   </React.StrictMode>,
   document.getElementById("root")
 );

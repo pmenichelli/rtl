@@ -1,5 +1,5 @@
 import React from "react";
-// import { Hero } from "../hero/hero";
+import { Hero } from "../hero/hero";
 
 import "./page-layout.scss";
 
@@ -10,5 +10,10 @@ import "./page-layout.scss";
  * If the `hero` prop is passed along this layout adjusts to show it properly.
  */
 export function PageLayout({ hero, children }) {
-  return <section className="layout">{children}</section>;
+  return (
+    <React.Fragment>
+      {hero && <Hero headline={hero.headline} subtext={hero.subtext}></Hero>}
+      <section className="layout">{children}</section>
+    </React.Fragment>
+  );
 }

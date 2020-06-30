@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { PageLayout } from "../../components/page-layout/page-layout";
 import { SearchBar } from "../../components/search-bar/search-bar";
 import { Tile } from "../../components/tile/tile";
@@ -26,19 +28,25 @@ class SearchPage extends React.Component {
 
   renderShows(shows) {
     return shows.map((show) => {
-      const { image, name, genres } = show;
-      const props = {
+      const { image, name, genres, id } = show;
+
+      // props for the tile component
+      const tileProps = {
         url: image ? image.medium : "https://www.fillmurray.com/210/295",
         title: name,
         subtitle: genres.join(", "),
       };
-      return <Tile key={show.id} {...props}></Tile>;
+
+      return (
+        <Link key={id} to={`/show/${id}`}>
+          <Tile {...tileProps}></Tile>
+        </Link>
+      );
     });
   }
 }
 
 function mapStateToProps(state) {
-  console.log("mapStateToProps", state);
   return {
     shows: state.search.shows,
     isFetching: state.search.isFetching,

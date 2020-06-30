@@ -1,0 +1,16 @@
+body {
+  font-family: Gotham-Book, Helvetica Neue, Helvetica, Arial, sans-serif;
+  margin: 0;
+  background-color: #111;
+  color: hsla(0, 0%, 100%, 0.7);
+}
+
+.triangular-background {
+  &--top-left:before {
+    content: "";
+    position: fixed;
+    left: -245px;
+    top: 0;
+    transform: rotate(180deg);
+  }
+}
