@@ -66,3 +66,25 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+LEFT TODO
+
+- Unit and BDD tests, this is mandatory in a real world app.
+- Should organize code more using export defaults or index files to export stuff so imports are neater.
+- Might leverage typescript or at least Proptypes
+- Probably should give proper feedback to the user about the app state (just added a "loading" div to inditcate it's loading, but could have added error feedback for requests for example or a nice loading animation).
+- Now all requests are done every time, we could implement some serviceworker cache and also avoid some requests in some scenarios by passing some props when routing to other view.
+- Should take care of pagination when there are too many seasons and episodes
+- Unhandled routes should redirect to search page or at least show a nice not found message
+- Should test against screen readers for A11Y issues.
+- Inline styles for background images is not an elegant approach, should improve that.
+- Used a placeholder image service to save the cases when the API does not return images (that's ugly I know).
+
+APPROACH
+
+- Two categories of components, container components to handle logic (pages folder) and presentational components (components folder)
+- I used redux for state management (although it might not be necessary for an app this small) and redux-thunk for side effects
+- Used react-router-dom for the two pages
+- Also implemented a small tv shows service to handle requests to the API
+- My design skills are quite bad so I took a couple of simple ideas from codepen I quickly found
+- Forgive me for the double quote in all strings (")

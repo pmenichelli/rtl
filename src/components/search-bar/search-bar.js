@@ -3,10 +3,6 @@ import SearchIcon from "./search-icon";
 
 import "./search-bar.scss";
 
-/**
- *
- * @param {*} param0
- */
 function SearchBar({ onSearch, placeholder }) {
   return (
     <form

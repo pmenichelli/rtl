@@ -1,0 +1,13 @@
+.item {
+  display: flex;
+  padding: 12px;
+
+  &__image > img {
+    width: 250px;
+    height: 140px;
+  }
+
+  &__info {
+    margin-left: 8px;
+  }
+}

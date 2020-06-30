@@ -1,0 +1,19 @@
+.episodes {
+  &__container {
+    padding-top: 30px;
+  }
+
+  &__season {
+    padding-top: 40px;
+    padding-left: 40px;
+
+    &-title {
+      padding-left: 12px;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+}

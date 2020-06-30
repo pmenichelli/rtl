@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 
 import { fetchEpisodes, fetchShow } from "../../actions/actions";
 import { PageLayout } from "../../components/page-layout/page-layout";
+import { Item } from "../../components/item/item";
 
 import "./episode-page.scss";
 
 class EpisodePage extends React.Component {
   componentDidMount() {
-    console.log("EpisodePage", this.props);
     const { match, getShowInfo, getShowEpisodes } = this.props;
     getShowInfo(match.params.id);
     getShowEpisodes(match.params.id);
@@ -22,41 +22,86 @@ class EpisodePage extends React.Component {
     }
 
     const hero = {
-      heading: show.name,
+      headline: show.name,
       subtext: show.summary,
       imageUrl: show.image
         ? show.image.original
         : "https://www.fillmurray.com/400/500",
     };
+
     return (
       <PageLayout className="episodes" hero={hero}>
-        {this.renderEpisodes(episodes)}
+        <div className="episodes__container">
+          {this.renderEpisodesList(episodes)}
+        </div>
       </PageLayout>
     );
   }
 
-  renderEpisodes(episodes) {
+  renderEpisodesList(episodes) {
     if (!episodes) {
       return null;
     }
 
-    // group episodes by season as I have no idea in which order they come (although they seem to come sorted)
-    // if I had the guarantee this is always sorted all this logic could be removed.
+    // group episodes by season and I sort them as I have no idea in which order they
+    // come (although they seem to come sorted in the correct order).
+    // If I had the guarantee this is always sorted all this logic could be removed.
+    const seasons = this.sortEpisodesBySeason(episodes);
+
+    return seasons.map((season) => this.renderSeason(season));
+  }
+
+  /**
+   * Renders a whole season with it heading a list
+   */
+  renderSeason(season) {
+    const seasonNumber = season[0].season;
+
+    return (
+      <div key={Math.random()} className="episodes__season">
+        <h1 className="episodes__season-title">{`Season ${seasonNumber}`}</h1>
+        <ul className="episodes__list">
+          {season.map((episode) => this.renderEpisode(episode))}
+        </ul>
+      </div>
+    );
+  }
+
+  /**
+   * Renders a single episode
+   */
+  renderEpisode(episode) {
+    const { image, name, number, id, summary } = episode;
+    const props = {
+      url: image ? image.medium : "https://www.fillmurray.com/210/295",
+      title: `${number} - ${name}`,
+      description: summary,
+    };
+    return (
+      <li key={id}>
+        <Item {...props}></Item>
+      </li>
+    );
+  }
+
+  /**
+   * Returns an array that contains an array for each season with the episodes sorted by number.
+   */
+  sortEpisodesBySeason(episodes) {
+    // group by season
     const seasons = episodes.reduce((acc, episode) => {
-      acc[episode.season] = [].concat(acc[episode.season]).concat([episode]);
+      acc[episode.season] = []
+        .concat(acc[episode.season] || [])
+        .concat([episode]);
       return acc;
     }, []);
 
-    console.log(seasons);
-
-    return episodes.map((episode) => {
-      const { image, name, season, id } = episode;
-      const props = {
-        url: image ? image.medium : "https://www.fillmurray.com/210/295",
-        title: name,
-      };
-      return <div key={id}>{name}</div>;
+    // sort episodes in a season
+    seasons.forEach((season) => {
+      season.sort((a, b) => a.number - b.number);
     });
+
+    return seasons;
   }
 }
 
